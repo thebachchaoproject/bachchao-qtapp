@@ -5,11 +5,11 @@ import QtMultimediaKit 1.1
 import com.nokia.meego 1.0
 
 Page {
-
+    anchors.fill: parent; rotation: screen.currentOrientation == 1 ? 90:0
     Camera {
             id:camera
             x:0; y: 0
-            width:parent.width; height:parent.height
+            anchors.centerIn: parent
             focus : visible // to receive focus and capture key events when visible
             opacity: 1
 
@@ -31,9 +31,9 @@ Page {
 
             Button{
                 id:settingsButton
-                anchors.right:parent.right
-                anchors.top: parent.top
-                width: 200
+                rotation: screen.currentOrientation == 1 ? 270:0
+                anchors.verticalCenter: rotation == 270 ? parent.verticalCenter:undefined
+                anchors.horizontalCenter: rotation == 0? parent.horizontalCenter:undefined
                 text:"Settings"
 
                 onClicked: {
