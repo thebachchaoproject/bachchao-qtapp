@@ -47,6 +47,10 @@ Page {
             id:cancelButton
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Cancel"
+            Timer {
+                     interval: 30000; running: true;
+                     onTriggered: cancelButton.enabled = false
+            }
         }
     }
 }
