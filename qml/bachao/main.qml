@@ -10,4 +10,8 @@ PageStackWindow {
     ToolBar {
         anchors.bottom: parent.bottom
     }
+
+    SettingsPage {
+        id: settingsPage
+    }
 }

@@ -36,8 +36,8 @@ Page {
                 anchors.horizontalCenter: rotation == 0? parent.horizontalCenter:undefined
                 text:"Settings"
 
-                onClicked: {
-                    camera.captureImage();
+                onClicked: {        
+                        pageStack.push(settingsPage);
                 }
             }
         }
