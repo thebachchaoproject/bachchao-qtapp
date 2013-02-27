@@ -17,20 +17,19 @@ Page {
         flickableDirection: Flickable.VerticalFlick
         anchors.top: header.bottom
 
-    ContactsWidget {
+        ContactsWidget {
 
-        id: contactsWidget
-//        anchors.top: header.bottom
-    }
+            id: contactsWidget
+        }
 
-    VideoWidget {
-        id: videoWidget
-        anchors.top: contactsWidget.bottom
-    }
+        VideoWidget {
+            id: videoWidget
+            anchors.top: contactsWidget.bottom
+        }
 
-    LocationWidget {
-        id: locationWidget
-        anchors.top: videoWidget.bottom
+        LocationWidget {
+            id: locationWidget
+            anchors.top: videoWidget.bottom
+        }
     }
-}
 }

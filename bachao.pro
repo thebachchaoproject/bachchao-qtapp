@@ -12,7 +12,8 @@ QT += opengl
 # lines and add the respective components to the MOBILITY variable.
 CONFIG += mobility
 MOBILITY += multimedia \
-        location
+        location \
+        contacts
 # Speed up launching on MeeGo/Harmattan when using applauncherd daemon
 CONFIG += qdeclarative-boostable
 

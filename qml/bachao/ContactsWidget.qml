@@ -7,7 +7,26 @@ Rectangle {
     height: 250
     anchors.top: parent.top
     anchors.left: parent.left
-    anchors.right: parent.right
+    anchors.right: parent.right 
+    property int senderNum: 0
+    SelectContactsPage {
+        id: selectContactsPage
+    }
+    function setName(name) {
+        if(senderNum == 1) {
+            contactDetail1.text = name;
+            contactNum1.text = "";
+        }
+        if(senderNum == 2) {
+            contactDetail2.text = name;
+            contactNum2.text = "";
+        }
+        if(senderNum == 3) {
+            contactDetail3.text = name;
+            contactNum3.text = "";
+        }
+
+    }
 
     Label {
         id: contactHeader
@@ -33,7 +52,7 @@ Rectangle {
         Column {
             spacing: 20
             Item {
-                width: parent.width
+                width: screen.width
                 height: 40
                 anchors.bottomMargin: 10
                 MouseArea {
@@ -42,19 +61,24 @@ Rectangle {
                         x: 30
                         spacing: screen.currentOrientation == 1 ? 110:210
                         Text {
+                            id: contactDetail1
                             text: "Enter Number";
                             font.pixelSize: 30;
                             font.underline: true
                             width: 300
 
                         }
-                        Text {id: contactNum; text: "1"; font.pixelSize: 30;}
+                        Text {id: contactNum1; text: "1"; font.pixelSize: 30;}
                     }
-                    onClicked: {console.debug("ddddddddddddddd");}
+                    onClicked: {
+                        senderNum = 1;
+                        pageStack.push(selectContactsPage)
+                        selectContactsPage.contactSelected.connect(setName)
+                    }
                 }
             }
             Item {
-                width: parent.width
+                width: screen.width
                 height: 40
                 MouseArea {
                     anchors.fill: parent
@@ -62,17 +86,23 @@ Rectangle {
                         x: 30
                         spacing: screen.currentOrientation == 1 ? 110:210
                         Text {
+                            id: contactDetail2
                             text: "Enter Number";
                             font.pixelSize: 30
                             font.underline: true
                             width: 300
                         }
-                        Text {text: "2"; font.pixelSize: 30;}
+                        Text {id: contactNum2; text: "2"; font.pixelSize: 30;}
+                    }
+                    onClicked: {
+                        senderNum = 2;
+                        pageStack.push(selectContactsPage)
+                        selectContactsPage.contactSelected.connect(setName)
                     }
                 }
             }
             Item {
-                width: parent.width
+                width: screen.width
                 height: 40
                 MouseArea {
                     anchors.fill: parent
@@ -80,12 +110,18 @@ Rectangle {
                         x: 30
                         spacing: screen.currentOrientation == 1 ? 110:210
                         Text {
+                            id: contactDetail3
                             text: "Enter Number";
                             font.pixelSize: 30
                             font.underline: true
                             width: 300
                         }
-                        Text {text: "3"; font.pixelSize: 30;}
+                        Text {id: contactNum3; text: "3"; font.pixelSize: 30;}
+                    }
+                    onClicked: {
+                        senderNum = 3;
+                        pageStack.push(selectContactsPage)
+                        selectContactsPage.contactSelected.connect(setName)
                     }
                 }
             }
