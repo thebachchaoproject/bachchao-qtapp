@@ -11,6 +11,10 @@ PageStackWindow {
         anchors.bottom: parent.bottom
     }
 
+    CameraPage {
+        id: cameraPage
+    }
+
     SettingsPage {
         id: settingsPage
     }

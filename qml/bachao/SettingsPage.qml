@@ -32,4 +32,12 @@ Page {
             anchors.top: videoWidget.bottom
         }
     }
+
+    tools: ToolBarLayout {
+        ToolIcon {
+            id: back
+            iconId: "toolbar-back";
+            onClicked: pageStack.pop()
+        }
+    }
 }
