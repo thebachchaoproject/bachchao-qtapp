@@ -35,6 +35,8 @@ Rectangle {
         id: videoStreaming
         anchors.left: videoColumn.right
         anchors.leftMargin: screen.currentOrientation == 1 ? 40:140
+        checked: Settings.value("User/VideoStreaming",true)
+        onCheckedChanged: Settings.setValue("User/VideoStreaming", checked)
     }
     //ADD Toggle button
 }

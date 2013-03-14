@@ -37,7 +37,10 @@ Page {
         ToolIcon {
             id: back
             iconId: "toolbar-back";
-            onClicked: pageStack.pop()
+            onClicked: {
+                Settings.sync();
+                pageStack.pop()
+            }
         }
     }
 }

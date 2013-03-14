@@ -8,6 +8,7 @@ Rectangle {
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
+    property variant locationSetting: Settings.value("User/location", 0)
     Column {
         spacing: 20
 
@@ -27,22 +28,30 @@ Rectangle {
         ButtonColumn {
             id: column
             spacing: 20
+            exclusive: true
             RadioButton {
                 id: button1hr
                 text: qsTr("1 hour")
-                checked: true
+                checked: locationSetting == 0 ? true:false
+                onClicked: Settings.setValue("User/location", 0)
             }
             RadioButton {
                 id: button6hr
                 text: qsTr("6 hours")
+                checked: locationSetting == 1 ? true:false
+                onClicked: Settings.setValue("User/location", 1)
             }
             RadioButton {
                 id: buttonDay
                 text: qsTr("Day")
+                checked: locationSetting == 2 ? true:false
+                onClicked: Settings.setValue("User/location", 2)
             }
             RadioButton {
                 id: buttonBachchao
                 text: qsTr("Only when press Bachchao")
+                checked: locationSetting == 3 ? true:false
+                onClicked: Settings.setValue("User/location", 3)
             }
         }
     }

@@ -10,7 +10,7 @@ Page {
     anchors.left: parent.left
     anchors.right: parent.right
 
-    signal contactSelected(string name)
+    signal contactSelected(string name, string num)
     Row {
         id: buttonRow
         x: 20
@@ -50,7 +50,8 @@ Page {
                 }
                 onClicked: {
                     contactList.currentIndex = index
-                    contactSelected(contactList.currentItem.myData.contact.name.firstName)
+                    contactSelected(contactList.currentItem.myData.contact.name.firstName,
+                                    contactList.currentItem.myData.contact.phoneNumber.number)
                 }
             }
         }
