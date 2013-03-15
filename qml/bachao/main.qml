@@ -18,4 +18,8 @@ PageStackWindow {
     SettingsPage {
         id: settingsPage
     }
+
+    MessageBox {
+        id: messageBox
+    }
 }

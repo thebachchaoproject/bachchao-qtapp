@@ -2,6 +2,7 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 import QtMobility.contacts 1.1
+
 Page {
     id: selectContactsPage
     width: parent.width
@@ -11,6 +12,7 @@ Page {
     anchors.right: parent.right
 
     signal contactSelected(string name, string num)
+
     Row {
         id: buttonRow
         x: 20
@@ -46,15 +48,31 @@ Page {
                 Text {
                     font.pixelSize: 30
                     font.bold: true
-                    text: model.contact.name.firstName + model.contact.name.lastName
+                    text: model.contact.name.firstName +" " + model.contact.name.lastName
                 }
                 onClicked: {
                     contactList.currentIndex = index
-                    contactSelected(contactList.currentItem.myData.contact.name.firstName,
-                                    contactList.currentItem.myData.contact.phoneNumber.number)
+                    var number = contactList.currentItem.myData.contact.phoneNumber.number
+                    var isContactAdded = false
+                    for (var i = 1; i <= 3; i++)
+                    {
+                        var key = "Contact"+i+"/number";
+                        if (Settings.value(key) == number)
+                        {
+                            messageBox.show("Contact already added");
+                            isContactAdded  = true;
+                        }
+                    }
+                    if (!isContactAdded) {
+                        var fullname = model.contact.name.firstName
+                        if (model.contact.name.lastName)
+                            fullname=  fullname+ " " + model.contact.name.lastName
+                        contactSelected(fullname, number)
+                    }
                 }
             }
         }
     }
+
     onContactSelected : {pageStack.pop()}
 }
