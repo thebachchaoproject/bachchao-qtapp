@@ -3,6 +3,7 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 
 Rectangle {
+    id: contactWidget
     width: parent.width
     height: 250
     anchors.top: parent.top
@@ -12,26 +13,36 @@ Rectangle {
     SelectContactsPage {
         id: selectContactsPage
     }
-    function setName(name, num) {
-        if(senderNum == 1) {
-            contactDetail1.text = name;
-            contactNum1.text = "";
-            Settings.setValue("Contact1/name", name);
-            Settings.setValue("Contact1/number", num);
-        }
-        if(senderNum == 2) {
-            contactDetail2.text = name;
-            contactNum2.text = "";
-            Settings.setValue("Contact2/name", name);
-            Settings.setValue("Contact2/number", num);
-        }
-        if(senderNum == 3) {
-            contactDetail3.text = name;
-            contactNum3.text = "";
-            Settings.setValue("Contact3/name", name);
-            Settings.setValue("Contact3/number", num);
-        }
 
+    AddContactsPage {
+        id: addContactsPage
+    }
+    function setContactDetails(contactDetails)
+    {
+        var keys = Object.keys(contactDetails)
+        for(var i = 0; i < keys.length; i++)
+        {
+            var keyField = keys[i];
+            var key = "Contact"+senderNum+"/"+keyField
+            if (contactDetails[keyField] == "")
+               Settings.remove(key);
+            else
+               Settings.setValue(key, contactDetails[keyField])
+            switch(senderNum) {
+                case 1 :
+                    contactDetail1.text = contactDetails.name;
+                    contactNum1.text = "";
+                    break;
+                case 2 :
+                    contactDetail2.text = contactDetails.name;
+                    contactNum2.text = "";
+                    break;
+                case 3 :
+                    contactDetail3.text = contactDetails.name;
+                    contactNum3.text = "";
+                    break;
+            }
+        }
     }
 
     Label {
@@ -83,7 +94,6 @@ Rectangle {
                     onClicked: {
                         senderNum = 1;
                         pageStack.push(selectContactsPage)
-                        selectContactsPage.contactSelected.connect(setName)
                     }
                 }
             }
@@ -111,7 +121,6 @@ Rectangle {
                     onClicked: {
                         senderNum = 2;
                         pageStack.push(selectContactsPage)
-                        selectContactsPage.contactSelected.connect(setName)
                     }
                 }
             }
@@ -139,7 +148,6 @@ Rectangle {
                     onClicked: {
                         senderNum = 3;
                         pageStack.push(selectContactsPage)
-                        selectContactsPage.contactSelected.connect(setName)
                     }
                 }
             }

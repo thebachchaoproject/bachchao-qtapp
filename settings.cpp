@@ -30,3 +30,8 @@ bool Settings::contains(const QString &key) const
 {
     return QSettings::contains(key);
 }
+
+void Settings::remove(const QString &key)
+{
+    QSettings::remove(key);
+}

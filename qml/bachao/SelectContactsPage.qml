@@ -11,23 +11,17 @@ Page {
     anchors.left: parent.left
     anchors.right: parent.right
 
-    signal contactSelected(string name, string num)
-
-    Row {
-        id: buttonRow
-        x: 20
-        y: 20
-        width: parent.width
-        Button {
-            id: cancel
-            width: 200
-            text: "Cancel"
-            onClicked: { pageStack.pop() }
-        }
+    Button {
+        id: manualAdd
+        y: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: "Add Contacts Manually"
+        onClicked: { pageStack.push(addContactsPage) }
     }
+
     ListView {
         id:  contactList
-        anchors.top: buttonRow.bottom
+        anchors.top: manualAdd.bottom
         anchors.topMargin: 20
         x:40
         width: screen.width
@@ -67,12 +61,22 @@ Page {
                         var fullname = model.contact.name.firstName
                         if (model.contact.name.lastName)
                             fullname=  fullname+ " " + model.contact.name.lastName
-                        contactSelected(fullname, number)
+                        var email = model.contact.email.emailAddress
+                        var details = {'name': fullname, 'number': number, 'email': email}
+                        contactWidget.setContactDetails(details)
+                        pageStack.pop()
                     }
                 }
             }
         }
     }
 
-    onContactSelected : {pageStack.pop()}
+    tools: ToolBarLayout {
+        Button {
+            id:cancelButton
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: "Cancel"
+            onClicked: { pageStack.pop() }
+        }
+    }
 }

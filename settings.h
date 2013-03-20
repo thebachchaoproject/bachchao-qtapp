@@ -13,6 +13,7 @@ public:
             const QString &key, const QVariant &defaultValue = QVariant()) const;
     Q_INVOKABLE void sync();
     Q_INVOKABLE bool contains(const QString &key) const;
+    Q_INVOKABLE void remove (const QString &key);
 };
 
 Q_DECLARE_METATYPE(Settings*)
