@@ -24,3 +24,21 @@ void Location::stopUpdate()
                        this, SLOT(positionUpdated(QGeoPositionInfo)));
     source->stopUpdates();
 }
+
+void Location::setLocationUpdateInterval(int interval)
+{
+    switch(interval) {
+        case OneHour:
+                source->setUpdateInterval(3600000);
+                break;
+        case SixHour:
+                source->setUpdateInterval(3600000);
+                break;
+        case OneDay:
+                source->setUpdateInterval(3600000);
+                break;
+        case OnlyWhenPressedBachao:
+                source->setUpdateInterval(3600000);
+                break;
+    }
+}

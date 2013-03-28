@@ -10,12 +10,22 @@ using namespace QtMobility;
 class Location : public QObject
  {
      Q_OBJECT
+
  public:
-     Location(QObject *parent = 0);
+
+    enum Interval {
+        OneHour = 0,
+        SixHour,
+        OneDay,
+        OnlyWhenPressedBachao
+    };
+
+    Location(QObject *parent = 0);
 
  private slots:
      void positionUpdated(const QGeoPositionInfo &info);
      void stopUpdate();
+     void setLocationUpdateInterval(int interval);
 
  private:
      QGeoPositionInfoSource *source;
