@@ -4,15 +4,12 @@
 #include <QStringList>
 #include <QDebug>
 
-Settings::Settings(QObject *parent) : QSettings(QSettings::IniFormat,
-                                                   QSettings::UserScope,
-                                                   QCoreApplication::instance()->organizationName(),
-                                                   QCoreApplication::instance()->applicationName(),
-                                                   parent)
+Settings::Settings(QObject *parent) : QSettings(parent)
 {}
 
 void Settings::setValue(const QString &key, const QVariant &value)
 {
+    qDebug() << "Saving value " << key << value << " to " << fileName();
     QSettings::setValue(key, value);
 }
 

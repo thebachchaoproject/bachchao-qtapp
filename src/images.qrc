@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/ui">
+        <file alias="bachao-button.png">images/Bachao Button.png</file>
+        <file alias="settings-button.png">images/Settings Button.png</file>
+        <file alias="location-icon.png">images/Location Icon.png</file>
+        <file alias="contacts-icon.png">images/Contacts_Icon.png</file>
+        <file alias="contact-avatar.png">images/SavedContactBox.png</file>
+        <file alias="message-icon.png">images/message_Icon.png</file>
+        <file alias="return-from-settings-icon.png">images/Return_Icon_SettingsPage.png</file>
+        <file alias="location-tab.png">images/LocationTab.png</file>
+        <file alias="location-tab-left.png">images/LocationTabLeft.png</file>
+        <file alias="location-tab-right.png">images/LocationTabRight.png</file>
+        <file alias="settings-header.png">images/Settings Header.png</file>
+        <file alias="generic-header.png">images/Generic Header.png</file>
+        <file alias="location-message-icon.png">images/LocationMessage.png</file>
+        <file alias="stop-recording-button.png">images/StopRecordButton.png</file>
+    </qresource>
+</RCC>

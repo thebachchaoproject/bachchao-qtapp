@@ -1,46 +1,105 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
-import QtMultimediaKit 1.1
-import com.nokia.meego 1.0
 
-Page {
-    id: settingsPage
-    anchors.fill: parent;
-    PageHeader {
-        id: header
-        text: qsTr("Settings")
-    }
+Rectangle {
+    id: settingsRootElement
+    property QtObject gpsSource
+    signal backPressed
 
-    Flickable {
-        width: parent.width; height: parent.height
-        contentWidth: parent.width; contentHeight: parent.height
-        flickableDirection: Flickable.VerticalFlick
-        anchors.top: header.bottom
+    focus: true
 
-        ContactsWidget {
+    Column {
+        id: settingsColumn
+        property int sectionHeight: (height - settingsHeaderImage.height)/3
+        anchors.fill: parent
 
-            id: contactsWidget
+        ImageButton {
+            id: settingsHeaderImage
+            width: parent.width; sourceSize.width: width
+            source: "qrc:/ui/settings-header.png"
+
+            ImageButton {
+                anchors {
+                    top: parent.top; bottom: parent.bottom
+                    left: parent.left; margins: 5
+                }
+                visible: settingsRootElement.activeFocus
+                sourceSize.height: height
+                source: "qrc:/ui/return-from-settings-icon.png"
+
+                onClicked: {
+                    settingsRootElement.focus = true;
+                    settingsRootElement.backPressed();
+                }
+            }
+
+            onClicked: settingsRootElement.focus = true
         }
 
-        VideoWidget {
-            id: videoWidget
-            anchors.top: contactsWidget.bottom
-        }
+        Item {
+            width: parent.width; height: parent.sectionHeight
+            visible: !messagingSection.activeFocus && !locationSection.activeFocus
 
-        LocationWidget {
-            id: locationWidget
-            anchors.top: videoWidget.bottom
-        }
-    }
-
-    tools: ToolBarLayout {
-        ToolIcon {
-            id: back
-            iconId: "toolbar-back";
-            onClicked: {
-                Settings.sync();
-                pageStack.pop()
+            ContactsSection {
+                id: contactsSection
+                anchors { fill: parent; margins: 20 }
+                onContactSelectionRequired: {
+                    settingsPageContactSelector.contactIndex = contactIndex;
+                    settingsPageContactSelector.state = "shown";
+                }
             }
         }
+
+        Item {
+            width: parent.width
+            height: locationSection.activeFocus ? parent.height*0.75 : parent.sectionHeight
+            visible: !messagingSection.activeFocus
+
+            LocationSection {
+                id: locationSection
+                anchors { fill: parent; margins: 5 }
+                z: 1
+                gpsSource: settingsRootElement.gpsSource
+                onInputPanelClosed: settingsRootElement.focus = true
+            }
+        }
+
+        Item {
+            width: parent.width
+            height: messagingSection.activeFocus ? parent.height/2 : parent.sectionHeight
+            visible: !locationSection.activeFocus
+
+            MessagingSection {
+                id: messagingSection
+                anchors { fill: parent; margins: 20 }
+                z: 1
+                onInputPanelClosed: settingsRootElement.focus = true
+            }
+        }
+
+        MouseArea {
+            width: parent.width
+            height: settingsRootElement.activeFocus ? 0 : parent.height/2
+            onClicked: settingsRootElement.focus = true
+        }
+    }
+
+    ContactSelector {
+        id: settingsPageContactSelector
+        anchors { top: parent.bottom; left: parent.left; right: parent.right }
+        height: parent.height
+        onContactSelected: {
+            state = "";
+            contactsSection.updateContactsModel();
+        }
+
+        states : [
+            State {
+                name: "shown"
+                AnchorChanges { target: settingsPageContactSelector; anchors.top: parent.top }
+            }
+        ]
+
+        transitions: [ Transition { AnchorAnimation { duration: 200 } } ]
     }
 }

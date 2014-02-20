@@ -1,46 +1,65 @@
 #include <QtCore/QCoreApplication>
 
-//#include "bachaodaemon.h"
-//#include "location.h"
-//#include "stdio.h"
+#include "bachaodaemonserviceinterface.h"
 #include "bachao-daemon.h"
 
-#include <QRemoteServiceRegister>
-#include <QServiceManager>
+#include <QtCore/QFile>
+#include <QtCore/QDateTime>
+#include <QtDBus/QDBusConnection>
+#include <QtCore/QTextStream>
+#include <QtCore/QDebug>
+
+#ifdef WRITE_LOG_TO_FILE
+
+void clearLogfile()
+{
+    QFile::remove("/tmp/bachao.log");
+}
+
+void myMessageOutput(QtMsgType type, const char *msg)
+{
+    QFile logFile("/tmp/bachao.log");
+    logFile.open(QIODevice::WriteOnly | QIODevice::Text  | QIODevice::Append);
+    QTextStream log(&logFile);
+
+    log << QDateTime::currentDateTime().toString() << ": ";
+    switch (type) {
+    case QtDebugMsg:
+        log << "Debug: " << msg;
+        break;
+    case QtWarningMsg:
+        log << "Warning: " << msg;
+        break;
+    case QtCriticalMsg:
+        log << "Critical: " << msg;
+        break;
+    case QtFatalMsg:
+        log << "Fatal: " << msg;
+        abort();
+    }
+    log << "\n";
+    log.flush();
+    logFile.close();
+}
+#endif
 
 int main(int argc, char *argv[])
 {
-//    BachaoDaemon::init_daemon();
+#ifdef WRITE_LOG_TO_FILE
+    clearLogfile();
+    qInstallMsgHandler(myMessageOutput);
+#endif
+
+    qDebug() << "Starting daemon...";
     QCoreApplication a(argc, argv);
+    QCoreApplication::setOrganizationName("Bachchao");
+    QCoreApplication::setApplicationName("BachchaoMobile");
 
     // Create daemon
-    BachaoDaemon daemon;
+    BachaoDaemon::instance()->startSources();
 
-    // Create service
-    // Create, register and publish IPC based service object
-    const QString serviceName("BachaoService");
-    const QString interfaceName("com.nokia.qt.examples.bachaodaemon");
-    const QString serviceVersion("1.0");
-
-    QtMobility::QServiceManager manager;
-
-    // Remove old service
-    manager.removeService(serviceName);
-
-    // Add service
-    bool addServiceOk = manager.addService("bachaoservice.xml");
-    Q_ASSERT(addServiceOk);
-
-    // Entry
-    QtMobility::QRemoteServiceRegister serviceRegister;
-    QtMobility::QRemoteServiceRegister::Entry entry =
-            serviceRegister.createEntry<BachaoDaemon>(serviceName, interfaceName, serviceVersion);
-
-    // Publish
-    serviceRegister.publishEntries("bachaodaemon");
-
-    // Keep service running
-    serviceRegister.setQuitOnLastInstanceClosed(false);
+    //Register D-Bus interfaces
+    BachaoDaemonServiceInterface interface;
 
     return a.exec();
 }

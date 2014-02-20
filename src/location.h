@@ -2,8 +2,8 @@
 #define LOCATION_H
 
 #include <QObject>
-#include <QGeoPositionInfoSource>
-#include <QGeoPositionInfo>
+#include <QtLocation/QGeoPositionInfoSource>
+#include <QtLocation/QGeoPositionInfo>
 
 using namespace QtMobility;
 
@@ -26,9 +26,6 @@ class Location : public QObject
      void positionUpdated(const QGeoPositionInfo &info);
      void stopUpdate();
      void setLocationUpdateInterval(int interval);
-
- private:
-     QGeoPositionInfoSource *source;
- };
+};
 
 #endif // LOCATION_H

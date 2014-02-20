@@ -4,40 +4,40 @@
 #
 #-------------------------------------------------
 
-QT       += core
-
-#QT       -= gui
+QT       += core dbus
+QT       -= gui
 
 TARGET = bachaod
-CONFIG   += console mobility
-MOBILITY += multimedia \
-        location \
-        serviceframework
+
 CONFIG   -= app_bundle
+CONFIG   += console mobility
+
+MOBILITY += multimedia location messaging
 
 TEMPLATE = app
 
-#mydaemon.path = /etc/init/apps
-#mydaemon.files = bachaod.conf
+daemonconf.path = /etc/init/apps
+daemonconf.files = bachaod.conf
 
-#SOURCES += main.cpp \
-#    location.cpp
-
-target.path = /opt/bachao/bin
 servicexml.path = /etc/init/apps
 servicexml.files = bachaoservice.xml
 
-INSTALLS += target servicexml
-OTHER_FILES += bachaoservice.xml
+target.path = /opt/bachao/bin
 
-#HEADERS += \
-#    location.h \
-#    bachaodaemon.h
+INSTALLS += target servicexml daemonconf
 
 HEADERS += \
-    bachao-daemon.h
+    bachao-daemon.h \
+    abstractinputsource.h \
+    gpsdatasource.h \
+    bachaodaemonserviceinterface.h \
+    gpsretryproxy.h
 
 SOURCES += main.cpp \
-    bachao-daemon.cpp
+    bachao-daemon.cpp \
+    abstractinputsource.cpp \
+    gpsdatasource.cpp \
+    bachaodaemonserviceinterface.cpp \
+    gpsretryproxy.cpp
 
 DEFINES += WRITE_LOG_TO_FILE

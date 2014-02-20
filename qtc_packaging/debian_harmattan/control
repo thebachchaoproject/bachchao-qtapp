@@ -1,0 +1,62 @@
+Source: bachao
+Section: user/other
+Priority: optional
+Maintainer: Shantanu Tushar <shantanu@kde.org>
+Build-Depends: debhelper (>= 5), libqt4-dev
+Standards-Version: 3.7.3
+Homepage: http://www.thebachchaoproject.org
+
+Package: bachao
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Project Bachchao aims to develop technology tools for safety based on presently in-use and emerging technology, turning everyday common technology to ensure your safety.
+ Bachchao is a well designed safety tool, intuitive and easy to use in case of emergency! The tool
+ runs on almost all types of mobile phones available around the world, thus turning your mobile
+ phone into a personal security system.
+XSBC-Maemo-Display-Name: bachao
+XB-Maemo-Icon-26:
+ iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+ AAAOxAAADsQBlSsOGwAACXNJREFUeJzNm0tvHMcVhb9b1d3zHnLGJCUxkiDFsix4YThOAAeI/0Kc
+ RRAgmyCL7L3yH8ivCOKsvFU28SoLG0lgL5IAAuxAjqzEjEVToihSIjmcJ6cfdbPoGb40FB/qGfIA
+ BRLD7inWqVu3TlWdEo4HuQ2GN7CdDuaY70wEiyUc93C/BQfooBwbctTfP3/36nTbmTlfvKuKN4+4
+ ktMj35scRFZ7YtZWu+3lL8Pmxu/ubnVIyRiWF79+2B9uvzFbnpuaek097+cobwtyRUXrQD67/z4T
+ NBTZSMQtdIz5+xed+LM/3H/y8HGr1QMiIOYFUTGSgE/fuX7B+LmfGfgV8CZQFpFzFfp7oaqKECk0
+ 2sb87T+h+9Mfl57d+efys3WgQ0rCcIjsgz34wV9//OoN4wUfGOF94JaI5EXk/IT8CIiICGIFKQVO
+ b80E9gfXatWgYe3m0ma7P3jsaAI+fef6BeMFH4jwS4GZrHpdVek7aMaORuhox2npJYpB8ETIimIR
+ MVbdVMXq9VqtmnzyYHWFtPExkHCAhB0Cbr8xWy6VK78wwvsCM2TU+MQp65Hj23bEg07EUidmpZew
+ 0ktY3Y5pxw4HFKxgM2JBEGNVKzUrl1dKlcUHa5vDfBAOfu6Q4A3fmZuaeo10zM+SYcg/6Sf8u9Gn
+ HSvJiFTUiWOe9RNaZZ8bZZ/AZEdCMUqu/HQ6eO8vsEna+B7QZw8JFuDzd6/WnM39RuA9Eckky6sq
+ jUj5bK3Htjs8DSsQOmiGDiNCzTeYzCIBKXtmyp+Zbv3r8cYGKQFd9hBgAGk7M4fyNlDOpGYgVLjf
+ DI+tSvpOWe7FdEeFyUsgn7jK64ab9WrpIvAKUAJ8BjOguQ3GF++qIFeynOqakaMRJid8J2Ercqhm
+ R4JRvJlCYW5+unIJmAEqQEDa+am8Vbz5gcjJDJ1YiY7UYfsRO+jEbmSuOC1EkLzRStnKDFAHpkjF
+ nAUwnQ4GcSUyVnh6Mkm+g8gdQ7+eDOK7pJhz8RQwTRoBeQbD3wCMQ9vbU87tRo5eoJz4O1WNdc4n
+ Df2AtPcHQ2BMKFjBO0VLcgZs5gyAihrShu80HsZKgME/4ZzuCeQ9M86l5nNfPTYCShaKJ+zKkm8o
+ eyZLHXYkxkaAiFDPe0c/uAcFI+QzUoLHxViXuHX/+F8vQNEznOCVTDDW6qr+8cezb4RyhjL4uBgr
+ AXkrTOee23IYiZyFKX/y2w5jD7hXjkuAEUre5Dedxl5j3ZcjKzFAyTP4Z7DxNHYCyp6hcETPWgMV
+ 32QvgI6BsRNQsEIteHE1vgjTvjmVcnxZjJ0A30DFkxfOBgVPyFmZqAAaYuwEGEmTW3BIfAvp+M+f
+ RfwzAQKGDSwcovCMpJI5d0Y77xMiAEqHDHBPhKpvsROWwEOMnwBJ9/3Lh2T5wEJ50vp3DyZSc9rL
+ Bm9EmOeNUDmL9D/ARAgwks4EuREhUPYtZ6CAdzARAkSEgjUj9cCFvHcm098QJ1uwvwQCI0z5BsPu
+ IYkIzARne+46MQKsCPWcZb7o7ewYW5Ezm/+HmBgBIlAPDG/Vgt3PzoHRZGIEQNrjhTPu8YOYCAGq
+ kKjSd2lxgyRgRShaITDZ+QNOirET4FRpRsqT7ZjN0NFN3A4BQ30wk7PM5S35MyBi7AQ86ib8txXS
+ jh3xgWNyATb6CSu9mAt5y81qwNSEVeHYCIidstiN+WKjf+gzQ1NfL1EWOzEboeOH9Rz1YHKbo2Oh
+ 26nyNExYaIbPVVa0qR6o+kLuQO3NgZWmm2imR+QvwlgiYNspDzsxnXi3EVZgLm+5VvJTSazQiBzf
+ tMJ9z61tJ8zlE/IFbyI7RJkToArtSNnsu51jbgFmcpZb1WBfeNdyBiPwVaNPOHi4nyjP+gkX8xZv
+ Ajoh8yHgUNqxo+92T/lzBq4UPWoHxrYnwnzecrHg7XkfWlE6XU5iGIwlByS63x7hW6HoCaPOiXzz
+ /CGqUyXO2CVxGCYy5ww7clRiH+XNUE5h+z4lxkKAJ/tVfuiUrUiJR4R05JR2vP9zX9IZIosMIKAx
+ kkSYkTFlFks4RFaBRgb1YYCKZyjYXW5DB4vtiKfbCbFzOFWcKlHiWOrGPO7FO89agemcGcjjl6fA
+ AV31+i01ISOCynAP1xOzpsiGZpB1ZLD/N5Oz+/YAm5Hjq62QbzsJy72ER72Y+62Ir5vhjjQGKFrD
+ bM6e2F1yGFTVbfSjzlo32mb3DsGuVfa34H7fbS+XSsUFg7xJaiJ6KeSMcLnosR4mbA7mNwUaoaMT
+ h/hGUgN1ovscYVbge0UvUyXYNxItdLcba41mn9QwHbHHNG0A/TJsbrSM+YeDrSwqFYF6znCzGjyX
+ 4SOndAdO8b2N9wTmix7XSh65DLfIN5X2nUZ3LUmSoVd4m5QEB6gFuLPWd7dma93ZwLscOL2VhWPU
+ SCp5K75BSdcGBw37QjoNVn3DqxWfGxWfip+dRygSiT/u6t0/3/9uGdgAloHvBr9vA254eC/ftKL+
+ jXo5ng28t6y6KSEb22zJE2qBpRpYCp4hZ9KTorJnqOcsl0se3y/7XCoMl8PZND4W4rtOHn547+H9
+ Xhg2gTXg0aBsMTBM77gXWmFIU6V1rVYNKlavW9VKFqtzEUkPSH1DPbBczFsuFTzmCx4XC5aZwFLy
+ BM9k1/OxED+w9slHC0++XljfWift8cfAQ2CF9BpNArsXJhRgudVNGtZu1mrVpGblsu+0moVxU0Qw
+ InhG8A+U1FGa3ZiPROK7jocfLax+/eVq41mius5u6D8iJSNk4Mjd619RwC1ttsNPHqw+XilVFqt5
+ G5Q9M2VULZruYe5VaWddAHWgTjXpGemvQePjrt798N6j+wvrW+uDxn8L/A9YJB0GO70Pz/euJfXT
+ vwJcBq7++kev/eR1w82ZQmEub7Tiu6RoVM15uD4ZI0lXvf5GP+osdLcbdxrdtS+WVjdJs/0W8AT4
+ BlgCVoEmae/v5OKDBAjpErlIai2fA67Uq6WL89OVS2UrMzkXT1nn/IH39kwRYVxLTbjWjbbXGs3+
+ YKprkzZ0nXTcPwCeAi32hP4QowbfkIQ8aTTMkkbE0G8/za7j+jzscSu7t8J6pJK+QUrA00Fpszv3
+ 78NhDRB2iSiQRkR1TxkScF7gSBu4Tdr77UHpDj479PbokXeHSdXi0GufB3KkxAxJOg9Q0sQWkt4K
+ G94MSzjkwuQQx23AkIih1/7Mx/8IDIfC3kYfubg7TQ+el14fhROvZv8PMc24N9Lh+wcAAAAASUVO
+ RK5CYII=

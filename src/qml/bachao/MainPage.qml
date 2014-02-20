@@ -1,40 +1,68 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
-import QtQuick 1.0
+import QtQuick 1.1
 import com.nokia.meego 1.0
-//import MyLibrary 1.0
+import com.example.bachaocomponents 1.0 as BachaoComponents
 
 Page {
-    anchors.fill: parent;
+    orientationLock: PageOrientation.LockPortrait
 
-    Button {
-        id: helpButton
-        text: "Help"
-        x: screen.currentOrientation == 1 ? 50: 100
-        y: screen.currentOrientation == 1 ? 100: 50
-        width: screen.currentOrientation == 1 ? 370: 650
-        height: screen.currentOrientation == 1 ? 400: 200
-        onClicked: pageStack.push(cameraPage);
-    }
+    Rectangle {
+        id: rootElement
+        anchors.fill: parent
 
-    Button{
-        x: screen.currentOrientation == 1 ? 50: 500
-        y: screen.currentOrientation == 1 ? 570: 300
-        width: screen.currentOrientation == 1 ? 370: 300
-        id: settingsButton
-        text:" Settings"
-        onClicked: pageStack.push(settingsPage);
-    }
-
-    tools: ToolBarLayout {
-        Button {
-            id:cancelButton
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "Cancel"
-            Timer {
-                 interval: 30000; running: true;
-                 onTriggered: cancelButton.enabled = false
-            }
+        BachaoComponents.BachaoDaemonConnection {
+            id: commonGpsSource
+            sourceName: "gps"
         }
+
+        HomeScreen {
+            id: homeScreen
+            width: parent.width; height: parent.height
+            anchors { left: parent.left; top: parent.top }
+
+            onBachaoPressed: rootElement.state = "video"
+            onSettingsPressed: rootElement.state = "settings"
+        }
+
+        VideoRecording {
+            id: videoRecording
+            width: parent.width; height: parent.height
+            anchors { left: parent.right; top: parent.top }
+            gpsSource: commonGpsSource
+
+            onRecordingFinished: rootElement.state = ""
+        }
+
+        SettingsPage {
+            id: settingsPage
+            width: parent.width; height: parent.height
+            anchors { left: parent.right; top: parent.top }
+            gpsSource: commonGpsSource
+
+            onBackPressed: rootElement.state = ""
+        }
+
+        states: [
+            State {
+                name: "video"
+                AnchorChanges { target: homeScreen; anchors.left: parent.right }
+                AnchorChanges { target: settingsPage; anchors.left: parent.right }
+                AnchorChanges { target: videoRecording; anchors.left: parent.left }
+                StateChangeScript {
+                    script: {
+                        commonGpsSource.call("sendEmergency");
+                        videoRecording.startRecording();
+                    }
+                }
+            },
+            State {
+                name: "settings"
+                AnchorChanges { target: homeScreen; anchors.left: parent.right }
+                AnchorChanges { target: videoRecording; anchors.left: parent.right }
+                AnchorChanges { target: settingsPage; anchors.left: parent.left }
+            }
+        ]
+
+        transitions: [ Transition { AnchorAnimation { duration: 200 } } ]
     }
 }

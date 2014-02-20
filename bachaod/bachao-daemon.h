@@ -1,56 +1,27 @@
 #ifndef BACHAODAEMON_H
 #define BACHAODAEMON_H
 
-#include <QObject>
-#include <QPointer>
-#include <QFile>
-#include <QTextStream>
-#include <QVariant>
-#include <QSettings>
+#include <QtCore/QObject>
 
-// QtMobility API headers
-#include <QGeoPositionInfoSource>
-#include <QGeoPositionInfo>
+#include "abstractinputsource.h"
 
-// QtMobility namespace
-QTM_USE_NAMESPACE
-
-class Message;
 class BachaoDaemon: public QObject
 {
 Q_OBJECT
 
 public:
+    static BachaoDaemon *instance();
+    virtual ~BachaoDaemon();
+
+    void startSources();
+    AbstractInputSource *findSource(const QString &sourceName);
+    QList<AbstractInputSource*> sources();
+
+private:
     BachaoDaemon(QObject *parent = 0);
-    ~BachaoDaemon();
 
-signals:
-    // GPS started
-    void gpsInitialized();
-    // GPS closed
-    void gpsClosed();
-
-private:
-    void createGPS();
-    void deleteGPS();
-    int updateTime();
-
-private slots:
-
-    void updateTimeout();
-    void positionUpdated(QGeoPositionInfo);
-
-    // Log messages into text file
-    void log(QString str);
-
-    void startGps();
-
-private:
-    QPointer<QGeoPositionInfoSource> m_location;
-    QFile* m_file;
-    QTextStream m_outStream;
-    QSettings* m_settings;
-
+    static BachaoDaemon *m_instance;
+    QList<AbstractInputSource*> m_inputSources;
 };
 
 

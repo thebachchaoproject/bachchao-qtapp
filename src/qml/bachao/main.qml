@@ -2,24 +2,13 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 
 PageStackWindow {
-    id: app
-    showToolBar: true;
+    id: appWindow
 
-    initialPage: MainPage{}
+    initialPage: mainPage
+    showStatusBar: false
+    showToolBar: false
 
-    ToolBar {
-        anchors.bottom: parent.bottom
-    }
-
-    CameraPage {
-        id: cameraPage
-    }
-
-    SettingsPage {
-        id: settingsPage
-    }
-
-    MessageBox {
-        id: messageBox
+    MainPage {
+        id: mainPage
     }
 }
